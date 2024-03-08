@@ -1,9 +1,12 @@
 const express = require('express');
+const cors = require('cors');
+
 const db = require('./dbConfig');
 const app = express();
 const port = 3001;
 
 app.use(express.json());
+app.use(cors());
 
 app.post('/send-message', async (req, res) => {
     const { email, firstname, lastname, message } = req.body;
