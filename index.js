@@ -22,6 +22,17 @@ app.post('/send-message', async (req, res) => {
     }
 });
 
+app.get('/get-messages', async (req, res) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM messages ORDER BY created_at DESC');
+        res.json(rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: 'Erreur lors de la récupération des messages' });
+    }
+});
+
+
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
